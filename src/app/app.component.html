@@ -3,7 +3,10 @@
   <mat-tab label="Created users"> 
     <ul>
       <li *ngFor="let user of users">
-        <nz-card style="width:300px;" nzTitle="{{user.name}}">
+        <nz-card style="width:300px;" nzTitle="User:">
+          <a [routerLink]="['/person', user.name]">Name: {{user.name}}</a>
+          <p>Gender: {{user.gender}}</p>
+          <p>Height: {{user.height}}</p>
           <p>Position: {{user.position | user}}</p>
         </nz-card>
       </li>
@@ -16,6 +19,12 @@
         <input type="text" placeholder="Name" id="name"/>
       </div>
       <div>
+        <input type="text" placeholder="Gender" id="gender"/>
+      </div>
+      <div>
+        <input type="text" placeholder="Height" id="height"/>
+      </div>
+      <div>
         <input type="text" placeholder="Position" id="position"/>
       </div>
       <button nz-button class="login-form-button login-form-margin" (click)="createUser()">Create</button>
@@ -25,15 +34,7 @@
       </div>
     </form>
     </mat-tab>
-
-    <mat-tab label="Got users"> 
-      <ul>
-        <li *ngFor="let entity of pages">
-          <nz-card style="width:300px;" nzTitle="{{entity.name}}">
-            <p>Position: {{entity.position | user}}</p>
-          </nz-card>
-        </li>
-      </ul>
-    </mat-tab>
-
+    <div>
+      <router-outlet></router-outlet>
+    </div>
 </mat-tab-group>

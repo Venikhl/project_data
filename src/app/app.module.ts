@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {MatTabsModule} from '@angular/material/tabs';
 import { NzCardModule } from 'ng-zorro-antd/card';
 
+import { Routes, RouterModule } from "@angular/router";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,8 +18,13 @@ import { UserPipe } from './pipes/user.pipe';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { SwapiService } from './services/swapi.service';
+import { PersonComponent } from './routes/person.component';
 
 registerLocaleData(en);
+
+const routes: Routes = [
+  { path: 'person/:name', component: PersonComponent },
+];
 
 @NgModule({
   declarations: [
@@ -35,7 +41,8 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     NzCardModule,
-    MatTabsModule
+    MatTabsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, SwapiService],
   bootstrap: [AppComponent]
