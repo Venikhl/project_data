@@ -1,10 +1,9 @@
 <mat-tab-group animationDuration="0ms">
-
   <mat-tab label="Created users"> 
     <ul>
       <li *ngFor="let user of users">
         <nz-card style="width:300px;" nzTitle="User:">
-          <a [routerLink]="['/person', user.name]">Name: {{user.name}}</a>
+          <a [routerLink]="['/person', user.id]">Name: {{user.name}}</a>
           <p>Gender: {{user.gender}}</p>
           <p>Height: {{user.height}}</p>
           <p>Position: {{user.position | user}}</p>
@@ -33,6 +32,10 @@
         <label id="reg_label"></label>
       </div>
     </form>
+    </mat-tab>
+
+    <mat-tab label="User">
+      <app-person></app-person>
     </mat-tab>
     <div>
       <router-outlet></router-outlet>

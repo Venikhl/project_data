@@ -22,14 +22,15 @@ import { PersonComponent } from './routes/person.component';
 
 registerLocaleData(en);
 
-const routes: Routes = [
-  { path: 'person/:name', component: PersonComponent },
+const appRoutes = [
+  { path: "person/:id", component: PersonComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     UserPipe,
+    PersonComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,7 @@ const routes: Routes = [
     NzMenuModule,
     NzCardModule,
     MatTabsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, SwapiService],
   bootstrap: [AppComponent]

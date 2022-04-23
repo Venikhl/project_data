@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { User } from './entities/User';
 import { SwapiService } from './services/swapi.service';
+import * as uuid from 'uuid';
+import { PersonComponent } from './routes/person.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
+  @ViewChild(PersonComponent)
+  viewChild: PersonComponent | undefined
   title = 'project_data';
 
   public users: any[] = [];
@@ -16,17 +20,22 @@ export class AppComponent {
   public gender: string = "";
   public height: string = "";
   public position: string = "";
+  public user_tp: any;
 
   public constructor(private swapi: SwapiService){}
+  ngAfterViewInit() {
+    console.log(this.viewChild)
+  }
+
 
   public ngOnInit() {
     for(let i = 1; i <= 10; i++){
       this.swapi.person(i).subscribe((res) => {
-
-        this.users.push(res);
+        this.user_tp = res;
+        this.user_tp.id = uuid.v4();
+        this.users.push(this.user_tp);
       });
     }
-    
   }
   public createUser(): boolean {
     this.name = (document.getElementById(
@@ -59,6 +68,7 @@ export class AppComponent {
         this.name,
         this.gender,
         this.height,
+        uuid.v4(),
         this.position
       )
     );
